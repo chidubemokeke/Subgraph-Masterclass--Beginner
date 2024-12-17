@@ -4,7 +4,7 @@ Welcome to the Beginner Level of the Subgraph Development Masterclass. This tuto
 
 ## Overview
 
-In this masterclass, you'll gain essential skills in subgraph development, enabling you to efficiently index and query blockchain data for your decentralized application(dApps).
+In this masterclass, you'll gain essential skills in subgraph development, enabling you to efficiently index and query blockchain data for your decentralized application.
 
 ## Learning Objective
 
@@ -13,7 +13,7 @@ By completing this masterclass, you will:
 - Understand the purpose and benefits of subgraphs in dApps.
 - Learn how to set up your development environment for subgraph development.
 - Define GraphQL entities to model data structures for indexing smart contract events.
-- Implement mappings logic to transform blockchain events to entities in your subgraph.
+- Implement mapping logic to transform blockchain events into entities in your subgraph.
 - Deploy your subgraph using The Graph Studio for querying.
 
 ## Prerequisites
@@ -34,7 +34,7 @@ Before you begin, ensure you have the following installed:
 - Navigate to The Graph Studio, sign in, and create a new subgraph.
 - Enter the required details such as the subgraph name and description.
 - You will receive a deploy key and subgraph slug (e.g., username/subgraph-name)
-- Initialize your subgraph with the command from the studio.
+- Initialize your subgraph using the command from the studio.
 
 ```bash
 graph init --studio <subgraph-name>
@@ -67,7 +67,7 @@ The initialized project contains the following structure:
 
 ### Step 3: Defining your GraphQL Entities (`schema.graphql`)
 
-After initializing your subgraph project and setting up your directory structure, the next crucial step is to define your GraphQL entities in the schema. Entities represent and define the data structures that your subgraph will index from Ethereum smart contracts. Let's break down the entities defined in schema.graphql:
+After initializing your subgraph project and setting up your directory structure, the next crucial step is to define your GraphQL entities in the schema. Entities represent and define the data structures your subgraph will index from Ethereum smart contracts. Let's break down the entities defined in schema.graphql:
 
 ```gql
 # Define a Transfer type representing the transfer of tokens
@@ -98,8 +98,8 @@ type Account @entity {
   - id: A unique identifier for each transfer event, combining the transaction hash and log index.
     - from: A reference to the Account entity representing the sender.
     - to: A reference to the Account entity representing the receiver.
-    - value: The amount transferred, represented as a BigInt.
-    - timestamp: The block timestamp when the transfer occurred, represented as a BigInt.
+    - value: The amount transferred.
+    - timestamp: The block timestamp when the transfer occurred.
     - @entity(immutable: true): This directive ensures that the entity's fields cannot be modified once created, reflecting the immutable nature of blockchain data.
 
 ### Account Entity
@@ -108,13 +108,13 @@ type Account @entity {
 - Fields:
   - id: A unique identifier for each account, usually the account address.
   - sentTransfers: A list of Transfer entities where this account is the sender.
-  - receivedTransfers: A list of Transfer entities where this account is the receiver.
+  - receivedTransfers: A list of transfer entities where this account is the receiver.
   - totalSent: The total amount sent by this account, represented as a BigInt.
-  - totalReceived: The total amount received by this account, represented as a BigInt.
+  - totalReceived: The total amount received by this account.
   - sentCount: The number of transfers sent by this account.
     -receivedCount: The number of transfers received by this account.
 - Derived Fields:
-  - @derivedFrom(field: "from"): This directive indicates that the sentTransfers field should be populated based on the from field of the Transfer entity.
+  - @derivedFrom(field: "from"): This directive indicates that the sentTransfers field should be populated based on the from the field of the transfer entity.
   - @derivedFrom(field: "to"): This directive indicates that the receivedTransfers field should be populated based on the to field of the Transfer entity.
 
 ### Step 4: YAML Configuration (`subgraph.yaml`)
